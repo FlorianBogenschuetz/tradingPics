@@ -3,8 +3,9 @@
 <head>
   <title>Trade-Bildergalerie</title>
   <style>
-    h1 {
-        text-align: center;
+    #h1 {
+        text-align: center;        
+        background-color: rgb(219, 210, 210);
     }
     #container {
       display: flex;
@@ -31,13 +32,15 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background-color: white;
-      padding: 10px 0;
+      background-color: rgb(219, 210, 210);
+      padding: 0 0;
     }
   </style>
 </head>
 <body>
-  <h1>Trade-Bildergalerie</h1>
+    <div id="h1">
+        <h1>Trade-Bildergalerie</h1>
+    </div>
   <div id="container">
     <img id="entryImage" src="entry1.jpg" alt="Trade-Einstieg">
     <img id="exitImage" src="placeholder.jpg" alt="Trade-Ausstieg" style="display:none;">
