@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trade-Bildergalerie</title>
+  <style>
+    #container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    img {
+      max-width: 45%;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Trade-Bildergalerie</h1>
+  <div id="container">
+    <img id="entryImage" src="entry1.jpg" alt="Trade-Einstieg">
+    <img id="exitImage" src="placeholder.jpg" alt="Trade-Ausstieg" style="display:none;">
+  </div>
+  <button onclick="showExitImage()">Trade-Ausstieg anzeigen</button>
+  <button onclick="nextPair()">Nächstes Bildpaar</button>
+
+  <script>
+    // Bilderdaten
+    const imagePairs = [
+      { entry: 'images/entry1.png', exit: 'images/exit1.png' },
+      { entry: 'images/entry2.png', exit: 'images/exit2.png' },
+      { entry: 'images/entry3.png', exit: 'images/exit3.png' }
+    ];
+
+    let currentIndex = 0;
+
+    function showExitImage() {
+      const exitImage = document.getElementById('exitImage');
+      exitImage.src = imagePairs[currentIndex].exit;
+      exitImage.style.display = 'block';
+    }
+
+    function nextPair() {
+      currentIndex = (currentIndex + 1) % imagePairs.length;
+
+      const entryImage = document.getElementById('entryImage');
+      const exitImage = document.getElementById('exitImage');
+
+      // Zeige neues Bildpaar
+      entryImage.src = imagePairs[currentIndex].entry;
+      exitImage.style.display = 'none'; // Verstecke das Ausstiegsbild
+      exitImage.src = ''; // Leere den Ausstiegsbild-Placeholder
+    }
+  </script>
+</body>
+</html>
