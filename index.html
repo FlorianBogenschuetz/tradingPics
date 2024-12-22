@@ -15,11 +15,15 @@
       border-radius: 5px;
     }
     button {
-      display: block;
-      margin: 20px auto;
+      display: inline-block;
+      margin: 10px 10px;
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
+    }
+    #buttonContainer {
+      display: flex;
+      justify-content: center;
     }
   </style>
 </head>
@@ -29,8 +33,11 @@
     <img id="entryImage" src="entry1.jpg" alt="Trade-Einstieg">
     <img id="exitImage" src="placeholder.jpg" alt="Trade-Ausstieg" style="display:none;">
   </div>
-  <button onclick="showExitImage()">Trade-Ausstieg anzeigen</button>
-  <button onclick="nextPair()">Nächstes Bildpaar</button>
+  
+  <div id="buttonContainer">
+    <button onclick="showExitImage()">Trade-Ausstieg anzeigen</button>
+    <button onclick="nextPair()">Nächstes Bildpaar</button>
+  </div>
 
   <script>
     // Bilderdaten
