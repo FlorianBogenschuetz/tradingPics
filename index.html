@@ -5,7 +5,7 @@
   <style>
     #container {
       display: flex;
-      justify-content: space-around;
+      justify-content: flex-start;
       margin-top: 20px;
     }
     img {
@@ -40,6 +40,12 @@
     ];
 
     let currentIndex = 0;
+
+    // Setze das erste Entry-Bild beim Laden der Seite
+    window.onload = function() {
+      const entryImage = document.getElementById('entryImage');
+      entryImage.src = imagePairs[currentIndex].entry;
+    };
 
     function showExitImage() {
       const exitImage = document.getElementById('exitImage');
