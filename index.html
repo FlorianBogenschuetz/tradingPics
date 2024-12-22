@@ -17,10 +17,13 @@
         justify-content: space-between;
         margin-top: 20px;
         gap: 5px;
-        height: 90%; /* Höhe für den Hauptbereich */
+        height: 60%; /* Höhe für den Hauptbereich */
     }
     #picContainer img {
-        width:49%;
+        width: 100%; /* Setze die Breite auf 100% des Containers */
+        height: auto; /* Behalte das Seitenverhältnis bei */
+        max-height: 100%; /* Maximalhöhe auf 100% des Containers */
+        object-fit: contain; /* Skaliere das Bild, um es im Container zu zentrieren */
         border: 2px solid black;
         border-radius: 5px;
     }
@@ -51,8 +54,12 @@
         <h1>Trade-Bildergalerie</h1>
     </div>
   <div id="picContainer">
-    <img id="entryImage" src="entry1.jpg" alt="Trade-Einstieg">
-    <img id="exitImage" src="placeholder.jpg" alt="Trade-Ausstieg" style="display:none;">
+    <div class="imgContainer" style="flex: 1; display: flex; justify-content: center; align-items: center;">
+        <img id="entryImage" src="entry1.jpg" alt="Trade-Einstieg">
+    </div>
+    <div class="imgContainer" style="flex: 1; display: flex; justify-content: center; align-items: center;">
+        <img id="exitImage" src="placeholder.jpg" alt="Trade-Ausstieg" style="display:none;">
+    </div>
   </div>
   
   <div id="buttonContainer">
