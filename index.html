@@ -68,51 +68,58 @@
   </div>
 
   <script>
-    // Bilderdaten
-    const imagePairs = [
-      { entry: 'images/entry1.png', exit: 'images/exit1.png' },
-      { entry: 'images/entry2.png', exit: 'images/exit2.png' },
-      { entry: 'images/entry3.png', exit: 'images/exit3.png' }
-    ];
-
     let currentIndex = 0;
 
     // Setze das erste Entry-Bild beim Laden der Seite
     window.onload = function() {
-      const entryImage = document.getElementById('entryImage');
-      entryImage.src = imagePairs[currentIndex].entry;
+      loadImage();
     };
+
+    function loadImage() {
+      const entryImage = document.getElementById('entryImage');
+      const exitImage = document.getElementById('exitImage');
+
+      // Versuche, das Entry-Bild zu laden
+      entryImage.src = `images/entry${currentIndex + 1}.png`;
+      exitImage.src = `images/exit${currentIndex + 1}.png`;
+
+      // Überprüfe, ob das Entry-Bild existiert
+      const img = new Image();
+      img.src = entryImage.src;
+      img.onload = function() {
+        // Bild existiert, zeige es an
+        entryImage.style.display = 'block';
+        exitImage.style.display = 'none'; // Verstecke das Ausstiegsbild
+      };
+      img.onerror = function() {
+        // Bild existiert nicht, gehe zurück zu Index 0
+        currentIndex = 0; // Setze den Index auf 0 zurück
+        loadImage(); // Versuche es erneut
+      };
+    }
 
     function showExitImage() {
       const exitImage = document.getElementById('exitImage');
-      exitImage.src = imagePairs[currentIndex].exit;
       exitImage.style.display = 'block';
     }
 
     function nextPair() {
-      currentIndex = (currentIndex + 1) % imagePairs.length;
-
-      const entryImage = document.getElementById('entryImage');
-      const exitImage = document.getElementById('exitImage');
-
-      // Zeige neues Bildpaar
-      entryImage.src = imagePairs[currentIndex].entry;
-      exitImage.style.display = 'none'; // Verstecke das Ausstiegsbild
-      exitImage.src = ''; // Leere den Ausstiegsbild-Placeholder
+      currentIndex = (currentIndex + 1) % 3; // Hier 3 anpassen, wenn mehr Bilder vorhanden sind
+      loadImage(); // Lade das nächste Bildpaar
     }
 
     // Tastenkürzel hinzufügen
     document.addEventListener('keydown', function(event) {
-      if (event.key === '1' || event.key === '0') { // 'e' für Trade-Ausstieg anzeigen
+      if (event.key === '1' || event.key === '0') {
         showExitImage();
-      } else if (event.key === 'n' || event.key === 'Enter' || event.key === ' ') { // 'n', Enter oder Space für Nächstes Bildpaar
+      } else if (event.key === 'n' || event.key === 'Enter' || event.key === ' ') {
         nextPair();
-      } else if (event.key === 'ArrowRight') { // Rechte Pfeiltaste
+      } else if (event.key === 'ArrowRight') {
         const exitImage = document.getElementById('exitImage');
         if (exitImage.style.display === 'none') {
-          showExitImage(); // Zeige das Ausstiegsbild an, wenn es noch nicht angezeigt wird
+          showExitImage();
         } else {
-          nextPair(); // Gehe zum nächsten Bildpaar
+          nextPair();
         }
       }
     });
