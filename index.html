@@ -17,7 +17,7 @@
         justify-content: space-between;
         margin-top: 20px;
         gap: 5px;
-        height: 60%; /* Höhe für den Hauptbereich */
+        height: 80%; /* Höhe für den Hauptbereich */
     }
     #picContainer img {
         width: 100%; /* Setze die Breite auf 100% des Containers */
@@ -143,6 +143,10 @@
         } else {
           nextPair();
         }
+      } else if (event.key === 'ArrowLeft') {
+        console.log(`links`); // Ausgabe in der Konsole
+        currentIndex = (currentIndex - 1 + trades.length) % trades.length; // Index aktualisieren
+        loadImage(); // Nächstes Bild laden
       }
     });
   </script>
