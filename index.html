@@ -47,6 +47,9 @@
         padding: 5px 5px;
         height: auto; /* Höhe für den Button-Container */
     }
+    .highlight {
+        border: 2px solid orange; /* Beispiel für Hervorhebung */
+    }
   </style>
 </head>
 <body>
@@ -65,17 +68,16 @@
   <div id="buttonContainer">
     <button onclick="showExitImage()">Trade-Ausstieg anzeigen</button>
     <button onclick="nextPair()">Nächstes Bildpaar</button>
+    <button id="konto05Button" onclick="setImageSource('images/Konto_05')">Konto 05</button>
+    <button id="kontoXXButton" onclick="setImageSource('images')">Konto xx</button>
   </div>
 
   <script>
     let currentIndex = 0;
-    let trades = [
-      { "index": 0, "result": "profit" },
-      { "index": 1, "result": "profit" },
-      { "index": 2, "result": "profit" },
-      { "index": 3, "result": "loss" },
-      { "index": 4, "result": "profit" }
-    ]; // Array für die Trades
+
+    // Neue Variable für die Bildquelle
+    let currentSource = 'images/Konto_05'; // Standardquelle
+    document.getElementById('konto05Button').classList.add('highlight'); // Hervorhebung hinzufügen
 
     // Setze das erste Entry-Bild beim Laden der Seite
     window.onload = function() {
@@ -87,8 +89,8 @@
       const exitImage = document.getElementById('exitImage');
 
       // Versuche, das Entry-Bild zu laden
-      entryImage.src = `images/entry${currentIndex + 1}.png`;
-      exitImage.src = `images/exit${currentIndex + 1}.png`;
+      entryImage.src = `${currentSource}/entry${currentIndex + 1}.png`; // Verwendung der aktuellen Quelle
+      exitImage.src = `${currentSource}/exit${currentIndex + 1}.png`; // Verwendung der aktuellen Quelle
 
       // Überprüfe, ob das Entry-Bild existiert
       const img = new Image();
@@ -128,6 +130,38 @@
     function nextPair() {
       currentIndex = (currentIndex + 1) % trades.length; // Zyklen durch die Trades
       loadImage(); // Lade das nächste Bildpaar
+    }
+
+    function setImageSource(source) {
+        currentSource = source; // Setze die aktuelle Quelle
+        currentIndex = 0; // Setze den Index zurück
+
+        // Entferne die Hervorhebung von beiden Buttons
+        document.getElementById('konto05Button').classList.remove('highlight');
+        document.getElementById('kontoXXButton').classList.remove('highlight');
+
+        // Setze die Trades basierend auf der Quelle
+        if (source === 'images/Konto_05') {
+            trades = [
+                { "index": 0, "result": "loss" },
+                { "index": 1, "result": "profit" },
+                { "index": 2, "result": "profit" },
+                { "index": 3, "result": "profit" },
+                { "index": 4, "result": "loss" }
+            ]; // Trades für Konto 05
+            document.getElementById('konto05Button').classList.add('highlight'); // Hervorhebung hinzufügen
+        } else if (source === 'images') {
+            trades = [
+                { "index": 0, "result": "profit" },
+                { "index": 1, "result": "profit" },
+                { "index": 2, "result": "profit" },
+                { "index": 3, "result": "loss" },
+                { "index": 4, "result": "profit" }
+            ]; // Trades für Konto xx
+            document.getElementById('kontoXXButton').classList.add('highlight'); // Hervorhebung hinzufügen
+        }
+
+        loadImage(); // Lade das erste Bild der neuen Quelle
     }
 
     // Tastenkürzel hinzufügen
