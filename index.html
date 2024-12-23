@@ -65,25 +65,24 @@
     </div>
   </div>
   
-  <div id="buttonContainer">
+  <div id="buttonContainer" style="display: flex; align-items: center; justify-content: center;">
     <button onclick="showExitImage()">Trade-Ausstieg anzeigen</button>
     <button onclick="nextPair()">Nächstes Bildpaar</button>
     <button id="konto05Button" onclick="setImageSource('images/Konto_05')">Konto 05</button>
     <button id="kontoXXButton" onclick="setImageSource('images')">Konto xx</button>
+    <div id="indexDisplay" style="position: fixed; right: 10px; font-size: 20px;">Trade: 1</div>
   </div>
 
-  <div id="indexDisplay" style="position: fixed; bottom: 10px; right: 10px; font-size: 20px;">Trade: 0</div>
 
   <script>
     let currentIndex = 0;
-
-    // Neue Variable für die Bildquelle
     let currentSource = 'images/Konto_05'; // Standardquelle
-    document.getElementById('konto05Button').classList.add('highlight'); // Hervorhebung hinzufügen
+    let trades = []; // Trades-Variable global definieren
 
-    // Setze das erste Entry-Bild beim Laden der Seite
+    // Setze die Trades beim Laden der Seite
     window.onload = function() {
-      loadImage();
+      setImageSource(currentSource); // Initialisiere die Trades
+      loadImage(); // Lade das erste Bild
     };
 
     function loadImage() {
@@ -251,8 +250,9 @@
         }
       } else if (event.key === 'ArrowLeft') {
         console.log(`links`); // Ausgabe in der Konsole
-        currentIndex = (currentIndex - 1 + trades.length) % trades.length; // Index aktualisieren
+        currentIndex = (currentIndex - 1 + trades.length); // Index aktualisieren
         loadImage(); // Nächstes Bild laden
+        updateIndexDisplay();
       }
     });
 
