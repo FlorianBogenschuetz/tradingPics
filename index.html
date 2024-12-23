@@ -72,6 +72,8 @@
     <button id="kontoXXButton" onclick="setImageSource('images')">Konto xx</button>
   </div>
 
+  <div id="indexDisplay" style="position: fixed; bottom: 10px; right: 10px; font-size: 20px;">Trade: 0</div>
+
   <script>
     let currentIndex = 0;
 
@@ -110,6 +112,7 @@
     function showExitImage() {
       const exitImage = document.getElementById('exitImage');
       exitImage.style.display = 'block';
+      updateIndexDisplay(); // Aktualisiere die Anzeige der Indexnummer
 
       // Zeige das Ergebnis des Trades an
       if (currentIndex < trades.length) {
@@ -130,6 +133,7 @@
     function nextPair() {
       currentIndex = (currentIndex + 1) % trades.length; // Zyklen durch die Trades
       loadImage(); // Lade das nächste Bildpaar
+      updateIndexDisplay(); // Aktualisiere die Anzeige der Indexnummer
     }
 
     function setImageSource(source) {
@@ -251,6 +255,10 @@
         loadImage(); // Nächstes Bild laden
       }
     });
+
+    function updateIndexDisplay() {
+      document.getElementById('indexDisplay').innerText = `Trade: ${currentIndex + 1}`; // Zeige den Index + 1 an
+    }
   </script>
 </body>
 </html>
