@@ -256,8 +256,7 @@
           nextPair();
         }
       } else if (event.key === 'ArrowLeft') {
-        // console.log(`links`); // Entfernt
-        currentIndex = (currentIndex - 1 + trades.length); // Index aktualisieren
+        currentIndex = (currentIndex - 1 + trades.length) % trades.length; // Index aktualisieren
         loadImage(); // Nächstes Bild laden
       }
     });
