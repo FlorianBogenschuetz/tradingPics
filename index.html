@@ -45,7 +45,7 @@
         right: 0;
         background-color: rgb(219, 210, 210);
         padding: 5px 5px;
-        height: 5%; /* Höhe für den Button-Container */
+        height: auto; /* Höhe für den Button-Container */
     }
   </style>
 </head>
@@ -100,6 +100,22 @@
       exitImage.style.display = 'none'; // Verstecke das Ausstiegsbild
       exitImage.src = ''; // Leere den Ausstiegsbild-Placeholder
     }
+
+    // Tastenkürzel hinzufügen
+    document.addEventListener('keydown', function(event) {
+      if (event.key === '1' || event.key === '0') { // 'e' für Trade-Ausstieg anzeigen
+        showExitImage();
+      } else if (event.key === 'n' || event.key === 'Enter' || event.key === ' ') { // 'n', Enter oder Space für Nächstes Bildpaar
+        nextPair();
+      } else if (event.key === 'ArrowRight') { // Rechte Pfeiltaste
+        const exitImage = document.getElementById('exitImage');
+        if (exitImage.style.display === 'none') {
+          showExitImage(); // Zeige das Ausstiegsbild an, wenn es noch nicht angezeigt wird
+        } else {
+          nextPair(); // Gehe zum nächsten Bildpaar
+        }
+      }
+    });
   </script>
 </body>
 </html>
