@@ -6,6 +6,7 @@
     html, body {
         height: 100%; /* Setze die Höhe auf 100% */
         margin: 4px; /* Entferne Standard-Margen */
+        background-color: rgb(255, 255, 255); /* Hintergrundfarbe auf schwarz setzen */
     }
     #h1 {
         text-align: center;        
@@ -50,12 +51,21 @@
     .highlight {
         border: 2px solid orange; /* Beispiel für Hervorhebung */
     }
+    .colored-button {
+      background-color: #4CAF50; /* Beispiel für eine grüne Hintergrundfarbe */
+      color: rgb(0, 0, 0); /* Textfarbe */
+      border: none; /* Kein Rahmen */
+      border-radius: 5px; /* Abgerundete Ecken */
+    }
+    .colored-button:hover {
+      background-color: #45a049; /* Dunklere Farbe beim Hover */
+    }
   </style>
 </head>
 <body>
   <div id="passwordContainer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
-      <input type="password" id="passwordInput" placeholder="Passwort eingeben" />
-      <button onclick="checkPassword()">Einloggen</button>
+      <input type="password" id="passwordInput" placeholder="Passwort eingeben" style="font-size: 25px; padding: 15px; width: 300px;" />
+      <button onclick="checkPassword()" style="font-size: 25px; padding: 15px 30px;">Einloggen</button>
       <div id="errorMessage" style="color: red; display: none;">Falsches Passwort!</div>
   </div>
   
@@ -73,8 +83,8 @@
   </div>
   
   <div id="buttonContainer">
-    <button onclick="showExitImage()">Trade-Ausstieg anzeigen</button>
-    <button onclick="nextPair()">Nächstes Bildpaar</button>
+    <button class="colored-button" onclick="goBack()">Zurück</button>
+    <button class="colored-button" onclick="goForward()">Weiter</button>
     <button id="konto05Button" onclick="setImageSource('images/Konto_05')">Konto 05</button>
     <button id="kontoXXButton" onclick="setImageSource('images')">Konto xx</button>
     <div id="indexDisplay" style="position: fixed; right: 10px; font-size: 20px;">Trade: 1</div>
@@ -276,6 +286,20 @@
             window.onload(); // Lade die Bilder
         } else {
             document.getElementById('errorMessage').style.display = 'block'; // Fehlermeldung anzeigen
+        }
+    }
+
+    function goBack() {
+        currentIndex = (currentIndex - 1 + trades.length) % trades.length; // Index aktualisieren
+        loadImage(); // Nächstes Bild laden
+    }
+
+    function goForward() {
+        const exitImage = document.getElementById('exitImage');
+        if (exitImage.style.display === 'none') {
+            showExitImage(); // Zeige das Ausstiegsbild an
+        } else {
+            nextPair(); // Lade das nächste Bildpaar
         }
     }
   </script>
