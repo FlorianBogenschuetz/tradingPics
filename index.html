@@ -37,7 +37,7 @@
       line-height: 0.5; /* Zeilenhöhe anpassen für vertikale Zentrierung */
     }
     #buttonContainer {
-        display: flex;
+        display: none; /* Standardmäßig nicht sichtbar */
         justify-content: center;
         position: fixed;
         bottom: 0;
@@ -53,14 +53,16 @@
   </style>
 </head>
 <body>
-    <div id="passwordContainer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
-        <input type="password" id="passwordInput" placeholder="Passwort eingeben" />
-        <button onclick="checkPassword()">Einloggen</button>
-        <div id="errorMessage" style="color: red; display: none;">Falsches Passwort!</div>
-    </div>
-    <div id="h1" style="display: none;">
-        <h1>Trade-Bildergalerie</h1>
-    </div>
+  <div id="passwordContainer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+      <input type="password" id="passwordInput" placeholder="Passwort eingeben" />
+      <button onclick="checkPassword()">Einloggen</button>
+      <div id="errorMessage" style="color: red; display: none;">Falsches Passwort!</div>
+  </div>
+  
+  <div id="h1" style="display: none;">
+      <h1>Trade-Bildergalerie</h1>
+  </div>
+
   <div id="picContainer">
     <div class="imgContainer" style="flex: 1; display: flex; justify-content: center; align-items: center;">
         <img id="entryImage" src="entry1.jpg" alt="Trade-Einstieg">
@@ -70,7 +72,7 @@
     </div>
   </div>
   
-  <div id="buttonContainer" style="display: flex; align-items: center; justify-content: center;">
+  <div id="buttonContainer">
     <button onclick="showExitImage()">Trade-Ausstieg anzeigen</button>
     <button onclick="nextPair()">Nächstes Bildpaar</button>
     <button id="konto05Button" onclick="setImageSource('images/Konto_05')">Konto 05</button>
@@ -121,7 +123,7 @@
       // Zeige das Ergebnis des Trades an
       if (currentIndex < trades.length) {
         const tradeResult = trades[currentIndex].result;
-        console.log(`Trade ${currentIndex + 1}: ${tradeResult}`);
+        // console.log(`Trade ${currentIndex + 1}: ${tradeResult}`); // Entfernt
 
         // Ändere den Rahmen des Ausstiegsbildes basierend auf dem Ergebnis
         if (tradeResult === "profit") {
@@ -130,7 +132,7 @@
           exitImage.style.border = '5px solid red'; // Roter Rahmen für Verlust
         }
       } else {
-        console.log(`Trade ${currentIndex + 1}: unbekannt`);
+        // console.log(`Trade ${currentIndex + 1}: unbekannt`); // Entfernt
       }
     }
 
@@ -254,7 +256,7 @@
           nextPair();
         }
       } else if (event.key === 'ArrowLeft') {
-        console.log(`links`); // Ausgabe in der Konsole
+        // console.log(`links`); // Entfernt
         currentIndex = (currentIndex - 1 + trades.length); // Index aktualisieren
         loadImage(); // Nächstes Bild laden
       }
@@ -271,6 +273,7 @@
         if (password === correctPassword) {
             document.getElementById('passwordContainer').style.display = 'none'; // Passwortcontainer ausblenden
             document.getElementById('h1').style.display = 'block'; // Überschrift anzeigen
+            document.getElementById('buttonContainer').style.display = 'flex'; // Button-Container anzeigen
             window.onload(); // Lade die Bilder
         } else {
             document.getElementById('errorMessage').style.display = 'block'; // Fehlermeldung anzeigen
