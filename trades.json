@@ -1,0 +1,9 @@
+{
+    "trades": [
+      { "index": 0, "result": "profit" },
+      { "index": 1, "result": "profit" },
+      { "index": 2, "result": "profit" },
+      { "index": 3, "result": "loss" },
+      { "index": 4, "result": "profit" }
+    ]
+  }

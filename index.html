@@ -69,6 +69,13 @@
 
   <script>
     let currentIndex = 0;
+    let trades = [
+      { "index": 0, "result": "profit" },
+      { "index": 1, "result": "profit" },
+      { "index": 2, "result": "profit" },
+      { "index": 3, "result": "loss" },
+      { "index": 4, "result": "profit" }
+    ]; // Array für die Trades
 
     // Setze das erste Entry-Bild beim Laden der Seite
     window.onload = function() {
@@ -101,10 +108,25 @@
     function showExitImage() {
       const exitImage = document.getElementById('exitImage');
       exitImage.style.display = 'block';
+
+      // Zeige das Ergebnis des Trades an
+      if (currentIndex < trades.length) {
+        const tradeResult = trades[currentIndex].result;
+        console.log(`Trade ${currentIndex + 1}: ${tradeResult}`);
+
+        // Ändere den Rahmen des Ausstiegsbildes basierend auf dem Ergebnis
+        if (tradeResult === "profit") {
+          exitImage.style.border = '5px solid green'; // Grüner Rahmen für Profit
+        } else {
+          exitImage.style.border = '5px solid red'; // Roter Rahmen für Verlust
+        }
+      } else {
+        console.log(`Trade ${currentIndex + 1}: unbekannt`);
+      }
     }
 
     function nextPair() {
-      currentIndex = (currentIndex + 1);
+      currentIndex = (currentIndex + 1) % trades.length; // Zyklen durch die Trades
       loadImage(); // Lade das nächste Bildpaar
     }
 
