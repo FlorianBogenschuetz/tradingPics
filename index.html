@@ -119,8 +119,8 @@
         exitImage.style.display = 'none'; // Verstecke das Ausstiegsbild
       };
       img.onerror = function() {
-        // Bild existiert nicht, gehe zurück zu Index 0
-        currentIndex = 0; // Setze den Index auf 0 zurück
+        // Bild existiert nicht, gehe zurück zu Index -1
+        currentIndex = currentIndex-1; // Setze den Index auf -1 zurück
         loadImage(); // Versuche es erneut
       };
       updateIndexDisplay(); // Aktualisiere die Anzeige der Indexnummer
